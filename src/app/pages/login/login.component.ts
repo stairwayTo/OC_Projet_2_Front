@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   submitted: boolean = false;
   loading: boolean = false;
   errorMessage: string = '';
+  successMessage: string = '';
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group(
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
     }
     this.loading = true;
     this.errorMessage = '';
+    this.successMessage ='';
     const loginUser: Login = {
       login: this.loginForm.get('login')?.value,
       password: this.loginForm.get('password')?.value
@@ -52,6 +54,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (response:LoginResponse) => {
           localStorage.setItem('token', response.token)
+          this.successMessage = 'Connexion réussie'
           this.loading = false},
         error: (err) => {
           this.loading = false
@@ -59,10 +62,5 @@ export class LoginComponent implements OnInit {
         }
       },
     );
-  }
-
-  onReset(): void {
-    this.submitted = false;
-    this.loginForm.reset();
   }
 }

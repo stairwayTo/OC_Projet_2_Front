@@ -37,13 +37,15 @@
       </div>
       <div class="text-center">
         <button class="btn btn-primary mr-1" [disabled]="loading">Login</button>
-        <button class="btn btn-secondary" type="reset" (click)="onReset()">
-          Cancel
-        </button>
         <div>
         @if (errorMessage) {
           {{errorMessage}}
         }
+        </div>
+        <div>
+          @if (successMessage) {
+            {{successMessage}}
+          }
         </div>
       </div>
     </form>
