@@ -5,7 +5,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { UserService } from '../../core/service/user.service';
 import { UserMockService } from '../../core/service/user-mock.service';
 
-describe('RegisterComponent', () => {
+describe('LoginComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
 
