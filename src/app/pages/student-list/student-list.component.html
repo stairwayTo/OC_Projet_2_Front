@@ -1,0 +1,36 @@
+<h2>Étudiants</h2>
+
+@if (errorMessage) {
+  <p class="error">{{ errorMessage }}</p>
+}
+
+<a routerLink="/students/new">Ajouter un étudiant</a>
+
+<table>
+  <thead>
+  <tr>
+    <th>Prénom</th>
+    <th>Nom</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (student of students; track student.id) {
+      <tr>
+        <td>{{ student.firstName }}</td>
+        <td>{{ student.lastName }}</td>
+        <td>{{ student.email }}</td>
+        <td>
+          <a [routerLink]="['/students', student.id]">Détail</a>
+          <a [routerLink]="['/students', student.id, 'edit']">Modifier</a>
+          <button type="button" (click)="deleteStudent(student.id)">Supprimer</button>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="4">Aucun étudiant</td>
+      </tr>
+    }
+  </tbody>
+</table>
