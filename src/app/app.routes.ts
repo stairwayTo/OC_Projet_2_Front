@@ -10,7 +10,8 @@ import {StudentFormComponent} from './pages/student-form/student-form.component'
 export const routes: Routes = [
   {
     path: '',
-    component: AppComponent,
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
     path: 'register',

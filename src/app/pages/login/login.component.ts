@@ -1,15 +1,16 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../../shared/material.module';
-import { UserService } from '../../core/service/user.service';
-import { Login } from '../../core/models/Login';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {MaterialModule} from '../../shared/material.module';
+import {UserService} from '../../core/service/user.service';
+import {Login} from '../../core/models/Login';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {LoginResponse} from '../../core/models/LoginResponse';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, RouterLink],
   templateUrl: './login.component.html',
   standalone: true,
   styleUrl: './login.component.css'
@@ -18,11 +19,11 @@ export class LoginComponent implements OnInit {
   private userService = inject(UserService);
   private formBuilder = inject(FormBuilder);
   private destroyRef = inject(DestroyRef);
+  private router = inject(Router);
   loginForm: FormGroup = new FormGroup({});
   submitted: boolean = false;
   loading: boolean = false;
   errorMessage: string = '';
-  successMessage: string = '';
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group(
@@ -44,7 +45,6 @@ export class LoginComponent implements OnInit {
     }
     this.loading = true;
     this.errorMessage = '';
-    this.successMessage ='';
     const loginUser: Login = {
       login: this.loginForm.get('login')?.value,
       password: this.loginForm.get('password')?.value
@@ -52,15 +52,17 @@ export class LoginComponent implements OnInit {
     this.userService.login(loginUser)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
-        next: (response:LoginResponse) => {
-          localStorage.setItem('token', response.token)
-          this.successMessage = 'Connexion réussie'
-          this.loading = false},
-        error: (err) => {
-          this.loading = false
-          this.errorMessage = err.error?.message||'Erreur de connexion';//revoir sans fatigue
-        }
-      },
-    );
+          next: (response: LoginResponse) => {
+            localStorage.setItem('token', response.token);
+            this.loading = false;
+            this.router.navigate(['/students']);
+          },
+
+          error: (err) => {
+            this.loading = false
+            this.errorMessage = err.error?.message || 'Erreur de connexion';//revoir sans fatigue
+          }
+        },
+      );
   }
 }
