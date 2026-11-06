@@ -1,0 +1,18 @@
+<h2>Détail de l'étudiant</h2>
+
+<a routerLink="/students">Retour à la liste</a>
+
+@if (errorMessage) {
+  <p class="error">{{ errorMessage }}</p>
+}
+
+@if (student) {
+  <p><strong>Prénom :</strong> {{ student.firstName }}</p>
+  <p><strong>Nom :</strong> {{ student.lastName }}</p>
+  <p><strong>Email :</strong> {{ student.email }}</p>
+  <p><strong>Date de création :</strong> {{ student.created_at | date:'dd/MM/yyyy HH:mm'}}</p>
+  <p><strong>Date de modif :</strong> {{ student.updated_at | date:'dd/MM/yyyy HH:mm'}}</p>
+
+
+  <a [routerLink]="['/students', student.id, 'edit']">Modifier</a>
+}
