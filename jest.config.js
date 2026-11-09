@@ -6,4 +6,11 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   collectCoverage: true,
   coverageReporters: ['html'],
+  collectCoverageFrom: [
+    'src/app/**/*.ts',
+    '!src/app/**/*.spec.ts',
+    '!src/app/shared/material.module.ts',
+    '!src/app/core/service/user-mock.service.ts',
+    '!src/app/core/models/**',
+  ],
 };

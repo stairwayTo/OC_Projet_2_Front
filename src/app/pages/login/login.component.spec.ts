@@ -4,6 +4,7 @@ import { LoginComponent } from './login.component';
 import { provideHttpClient } from '@angular/common/http';
 import { UserService } from '../../core/service/user.service';
 import { UserMockService } from '../../core/service/user-mock.service';
+import { provideRouter } from '@angular/router';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -13,6 +14,7 @@ describe('LoginComponent', () => {
     await TestBed.configureTestingModule({
       imports: [LoginComponent],
       providers: [
+        provideRouter([]),
         provideHttpClient(),
         { provide: UserService, useValue: UserMockService },
       ]
