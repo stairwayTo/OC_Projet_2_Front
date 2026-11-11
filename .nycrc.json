@@ -1,0 +1,19 @@
+{
+  "all": true,
+  "include": ["src/app/**/*.ts"],
+  "exclude": [
+    "src/app/**/*.spec.ts",
+    "src/app/shared/material.module.ts",
+    "src/app/core/service/user-mock.service.ts",
+    "src/app/core/models/**",
+    "src/app/app.config.ts",
+    "src/app/app.routes.ts"
+  ],
+  "reporter": ["html", "text-summary"],
+  "report-dir": "coverage-e2e",
+  "check-coverage": true,
+  "statements": 80,
+  "lines": 80,
+  "functions": 80,
+  "branches": 0
+}

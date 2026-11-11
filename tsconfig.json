@@ -18,6 +18,7 @@
     "target": "ES2022",
     "module": "ES2022"
   },
+  "exclude": ["cypress", "cypress.config.ts"],// fix les asserts
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

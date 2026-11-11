@@ -2,9 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {provideRouter, Router} from '@angular/router';
 
 import { RegisterComponent } from './register.component';
-import { provideHttpClient } from '@angular/common/http';
 import { UserService } from '../../core/service/user.service';
-import { UserMockService } from '../../core/service/user-mock.service';
 import {of} from 'rxjs';
 
 describe('RegisterComponent', () => {
